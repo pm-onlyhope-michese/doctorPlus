@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="456.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ControllerPatientsTable">
+   <children>
+      <VBox alignment="CENTER" prefHeight="70.0" prefWidth="731.0">
+         <children>
+            <Label text="Пациенты">
+               <font>
+                  <Font name="Times New Roman Bold" size="22.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="334.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="35.0" prefWidth="661.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="295.0" spacing="10.0">
+                           <children>
+                              <Label text="Врач: ">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="doctorName">
+                                 <font>
+                                    <Font name="Times New Roman" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox prefHeight="60.0" prefWidth="731.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="62.0" prefWidth="485.0" spacing="10.0">
+               <HBox.margin>
+                  <Insets bottom="10.0" />
+               </HBox.margin>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="textFieldSearch" prefHeight="37.0" prefWidth="348.0" promptText="Поиск">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="50.0" prefWidth="220.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickButtonLogout" text="Выйти">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" right="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="356.0" prefWidth="773.0">
+         <children>
+            <TableView fx:id="tableViewPatients" prefHeight="335.0" prefWidth="596.0">
+              <columns>
+                <TableColumn fx:id="tableColumnPatientsId" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="tableColumnPatientsName" prefWidth="543.0" text="Имя пациента" />
+              </columns>
+            </TableView>
+            <VBox alignment="CENTER" prefHeight="326.0" prefWidth="152.0" spacing="30.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickButtonAddPatient" text="Добавить">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" onAction="#clickButtonOpenPatientProfile" text="Изменить">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" onAction="#clickButtonDeletePatient" text="Удалить">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

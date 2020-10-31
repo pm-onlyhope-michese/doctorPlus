@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="456.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ControllerPatientRegistration">
+   <children>
+      <Label text="Добавление нового пациента">
+         <font>
+            <Font name="Times New Roman Bold" size="32.0" />
+         </font>
+      </Label>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="230.0" prefWidth="731.0">
+         <children>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="175.0" prefWidth="363.0" spacing="20.0">
+               <children>
+                  <TextField fx:id="textFieldFirstName" promptText="Имя пациента">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="textFieldLastName" prefHeight="25.0" prefWidth="334.0" promptText="Фамилия пациента">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font></TextField>
+                  <ChoiceBox fx:id="choiceBoxPatientsList" prefHeight="39.0" prefWidth="312.0" />
+                  <Label fx:id="labelError" textFill="RED">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="209.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickButtonApply" text="Подтвердить">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickButtonBack" text="Назад">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

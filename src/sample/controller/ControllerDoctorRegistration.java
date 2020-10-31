@@ -1,0 +1,90 @@
+package sample.controller;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import sample.config.Config;
+import sample.controller.baseController.Controller;
+import sample.model.ModelDoctorRegistration;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
+
+public class ControllerDoctorRegistration extends Controller {
+    private ModelDoctorRegistration model;
+    @FXML
+    private TextField textFieldFirstName;
+    @FXML
+    private TextField textFieldLastName;
+    @FXML
+    private TextField textFieldLogin;
+    @FXML
+    private PasswordField textFieldFirstPassword;
+    @FXML
+    private PasswordField textFieldSecondPassword;
+    @FXML
+    private Label labelError;
+
+    @FXML
+    private void initialize() {
+        System.out.println("initialize ControllerDoctorRegistration");
+        model = new ModelDoctorRegistration();
+    }
+
+    @FXML
+    private void clickButtonApply(ActionEvent event) throws IOException, SQLException {
+        String firstName = trim(textFieldFirstName.getText()).toLowerCase();
+        String lastName = trim(textFieldLastName.getText()).toLowerCase();
+
+        String login = trim(textFieldLogin.getText());
+        String firstPassword = trim(textFieldFirstPassword.getText());
+        String secondPassword = trim(textFieldSecondPassword.getText());
+
+        if (firstName.isEmpty() || lastName.isEmpty() || login.isEmpty()
+                || firstPassword.isEmpty() || secondPassword.isEmpty()
+        ) {
+            labelError.setText("Введите данные во все поля!");
+            return;
+        }
+
+        if (!firstPassword.equals(secondPassword)) {
+            labelError.setText("Пароли не совпадают!");
+            return;
+        }
+
+        if (model.findLogin(login)) {
+            labelError.setText("Такой логин уже существует!");
+            return;
+        }
+
+        Pattern pattern = Pattern.compile("[^a-zA-Zа-яА-ЯёЁ]+");
+        Matcher matherFirstName = pattern.matcher(firstName);
+        Matcher matherLastName = pattern.matcher(lastName);
+
+        if (matherFirstName.find() || matherLastName.find()) {
+            labelError.setText("В имени и фамилии должны содержаться только буквы!");
+            return;
+        }
+
+        firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
+        lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+
+        if (!model.doctorRegistration(firstName, lastName, login, firstPassword)) {
+            labelError.setText("Что-то пошло не так");
+            return;
+        }
+        app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+    }
+
+    @FXML
+    private void clickButtonBack(ActionEvent event) throws IOException, SQLException {
+        app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+    }
+}
