@@ -13,7 +13,7 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="213.0" prefWidth="731.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="213.0" prefWidth="389.0" spacing="10.0">
+            <VBox alignment="CENTER" prefHeight="213.0" prefWidth="421.0" spacing="10.0">
                <children>
                   <TextField fx:id="textFieldLogin" promptText="логин">
                      <font>
@@ -27,12 +27,12 @@
                   </PasswordField>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#clickButtonLogin" text="Войти">
+                        <Button mnemonicParsing="false" onAction="#clickButtonLogin" prefHeight="37.0" prefWidth="205.0" text="Войти">
                            <font>
                               <Font name="Times New Roman" size="20.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#clickButtonRegistration" text="Зарегистрироваться">
+                        <Button mnemonicParsing="false" onAction="#clickButtonRegistration" prefHeight="37.0" prefWidth="205.0" text="Зарегистрироваться">
                            <font>
                               <Font name="Times New Roman" size="20.0" />
                            </font>

@@ -1,7 +1,7 @@
 package sample.controller;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sample.classes.Doctor;
+import javafx.util.Duration;
 import sample.classes.Patient;
 import sample.config.Config;
 import sample.controller.baseController.Controller;

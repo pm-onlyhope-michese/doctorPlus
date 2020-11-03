@@ -3,6 +3,7 @@ package sample.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import sample.classes.Patient;
@@ -24,7 +25,7 @@ public class ControllerPatientRegistration extends Controller {
     @FXML
     private TextField textFieldLastName;
     @FXML
-    private ChoiceBox<Patient> choiceBoxPatientsList;
+    private ComboBox<Patient> comboBoxPatientsList;
     @FXML
     private Label labelError;
 
@@ -35,7 +36,8 @@ public class ControllerPatientRegistration extends Controller {
             app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
         }
         model = new ModelPatientRegistration();
-        choiceBoxPatientsList.setItems(model.getAllPatientsExceptDoctorPatients(app.getCurrentDoctor().getId()));
+        comboBoxPatientsList.setVisibleRowCount(20);
+        comboBoxPatientsList.setItems(model.getAllPatientsExceptDoctorPatients(app.getCurrentDoctor().getId()));
     }
 
     @FXML
@@ -48,7 +50,7 @@ public class ControllerPatientRegistration extends Controller {
         boolean result = false;
         int patient_id = 0;
 
-        if (choiceBoxPatientsList.getValue() == null) {
+        if (comboBoxPatientsList.getValue() == null) {
             String firstName = trim(textFieldFirstName.getText()).toLowerCase();
             String lastName = trim(textFieldLastName.getText()).toLowerCase();
 
@@ -57,7 +59,7 @@ public class ControllerPatientRegistration extends Controller {
                 return;
             }
 
-            Pattern pattern = Pattern.compile("[^a-zA-Zа-яА-Я]+");
+            Pattern pattern = Pattern.compile("^[^a-zа-яё]+&");
             Matcher matherFirstName = pattern.matcher(firstName);
             Matcher matherLastName = pattern.matcher(lastName);
 
@@ -72,7 +74,7 @@ public class ControllerPatientRegistration extends Controller {
             patient_id = model.patientRegistration(app.getCurrentDoctor().getId(), firstName, lastName);
             result = true;
         } else {
-            patient_id = choiceBoxPatientsList.getValue().getId();
+            patient_id = comboBoxPatientsList.getValue().getId();
             result = model.addPatientToDoctor(app.getCurrentDoctor().getId(), patient_id);
         }
 
