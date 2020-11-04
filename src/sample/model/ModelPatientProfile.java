@@ -4,10 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.classes.Analysis;
 import sample.classes.AnalysisNameList;
+import sample.classes.Patient;
+import sample.model.baseModel.Documentation;
 import sample.model.baseModel.Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModelPatientProfile extends Model {
     public boolean changeNamePatient(int patient_id, String firstName, String lastName) {
@@ -41,7 +45,7 @@ public class ModelPatientProfile extends Model {
             }
         } catch (SQLException exp) {
             System.err.println(exp.getMessage());
-        }finally {
+        } finally {
             db.close();
         }
 
@@ -92,5 +96,10 @@ public class ModelPatientProfile extends Model {
         }
 
         return result;
+    }
+
+    public boolean printAnalyzes(Patient patient) {
+        ModelPrintDocumentation model = new ModelPrintDocumentation();
+        return model.printAnalyzes(patient);
     }
 }

@@ -4,11 +4,15 @@ import javafx.animation.PauseTransition;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.classes.Patient;
 import sample.config.Config;
@@ -88,5 +92,19 @@ public class ControllerPatientsTable extends Controller {
 
     private void inputTextFieldSearch(ObservableValue<? extends String> obs, String oldText, String textSearch) throws SQLException {
         tableViewPatients.setItems(model.getAllPatientsByDoctorId(app.getCurrentDoctor().getId(), textSearch));
+    }
+
+    @FXML
+    private void clickButtonPrint() {
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(Config.pathPrintDocumentation));
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        stage.setTitle(Config.paths.get(Config.pathPrintDocumentation));
+        stage.setScene(new Scene(root, 259, 254));
+        stage.show();
     }
 }

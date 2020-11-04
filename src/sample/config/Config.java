@@ -11,6 +11,7 @@ public class Config {
     public static final String pathPatientProfile = "view/patientProfile.fxml";
     public static final String pathPatientRegistration = "view/patientRegistration.fxml";
     public static final String pathPatientsTable = "view/patientsTable.fxml";
+    public static final String pathPrintDocumentation = "view/printDocumentation.fxml";
     public static final Integer widthApp = 731;
     public static final Integer heightApp = 456;
 
@@ -21,5 +22,6 @@ public class Config {
         paths.put(pathPatientProfile, "Профиль пациента");
         paths.put(pathPatientRegistration, "Добавление нового пациента");
         paths.put(pathPatientsTable, "Пациенты");
+        paths.put(pathPrintDocumentation, "Печать");
     }
 }

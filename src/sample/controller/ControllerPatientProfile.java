@@ -69,11 +69,12 @@ public class ControllerPatientProfile extends Controller {
 
     @FXML
     private void clickButtonDeleteAnalysisFromPatient(ActionEvent event) throws IOException {
-        if(!showMessageConfirmation("Предупреждение", "Вы уверены, что хотите удалить анализ пациента?")) {
+        if (tableViewAnalyzes.getSelectionModel().getSelectedItem() == null) {
+            showMessageError("Ошибка!", "Выберите анализ!");
             return;
         }
 
-        if (tableViewAnalyzes.getSelectionModel().getSelectedItem() == null) {
+        if(!showMessageConfirmation("Предупреждение", "Вы уверены, что хотите удалить анализ пациента?")) {
             return;
         }
 
@@ -163,6 +164,15 @@ public class ControllerPatientProfile extends Controller {
         } else if (choiceBoxAnalysisNames.getValue().getType().equals("string")) {
             textFieldAnalysisResult.setVisible(false);
             choiceBoxAnalysisResult.setVisible(true);
+        }
+    }
+
+    @FXML
+    private void clickButtonPrintAnalyzes(ActionEvent event) {
+        if(model.printAnalyzes(app.getCurrentPatient())) {
+            showMessageConfirmation("Успех", "Документ успешно создан");
+        } else {
+            showMessageError("Ошибка!", "Что-то пошло не так");
         }
     }
 }

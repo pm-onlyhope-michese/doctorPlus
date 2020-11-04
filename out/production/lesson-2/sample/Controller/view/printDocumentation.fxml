@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="254.0" prefWidth="259.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.ControllerPrintDocumentation">
+   <children>
+      <ChoiceBox fx:id="choiceBox" prefHeight="37.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboBoxPatients" prefHeight="37.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboBoxAnalysis" prefHeight="37.0" prefWidth="150.0" />
+      <Button mnemonicParsing="false" onAction="#clickButtonPrint" prefHeight="37.0" prefWidth="115.0" text="Печать">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>

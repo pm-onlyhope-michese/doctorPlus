@@ -75,7 +75,7 @@
                   <TableColumn fx:id="tableColumnAnalyzesResult" minWidth="0.0" prefWidth="153.0" text="Результат" />
               </columns>
             </TableView>
-            <VBox alignment="CENTER" prefHeight="330.0" prefWidth="161.0" spacing="30.0">
+            <VBox alignment="CENTER" prefHeight="330.0" prefWidth="161.0" spacing="20.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="94.0" prefWidth="161.0" spacing="25.0">
                      <children>
@@ -91,11 +91,12 @@
                               <Font name="Times New Roman" size="20.0" />
                            </font>
                         </Button>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="66.0" prefWidth="161.0" spacing="30.0">
-                     <children>
                         <Button mnemonicParsing="false" onAction="#clickButtonDeleteAnalysisFromPatient" prefHeight="37.0" prefWidth="115.0" text="Удалить" textAlignment="CENTER">
+                           <font>
+                              <Font name="Times New Roman" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#clickButtonPrintAnalyzes" prefHeight="37.0" prefWidth="115.0" text="Печать">
                            <font>
                               <Font name="Times New Roman" size="20.0" />
                            </font>

@@ -93,6 +93,11 @@
                         <Font name="Times New Roman" size="20.0" />
                      </font>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#clickButtonPrint" prefHeight="37.0" prefWidth="115.0" text="Печать">
+                     <font>
+                        <Font name="Times New Roman" size="20.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
          </children>
