@@ -17,8 +17,9 @@ public class DB {
     public Connection getConnection() {
         if (connection == null) {
             try {
+                Config config = new Config();
                 Class.forName("com.mysql.jdbc.Driver");
-                this.connection = DriverManager.getConnection(Config.urlDB, Config.userNameDB, Config.passwordDB);
+                this.connection = DriverManager.getConnection(config.urlDB, config.userNameDB, config.passwordDB);
                 System.out.println("connection successful");
             } catch (SQLException | ClassNotFoundException exp) {
                 System.err.println(exp.getMessage());
@@ -38,7 +39,7 @@ public class DB {
         return instance;
     }
 
-    public ResultSet executeQuery(String sql) throws SQLException {
+    public ResultSet executeQuery(String sql) {
         getConnection();
         try {
             statement = connection.createStatement();
@@ -49,7 +50,7 @@ public class DB {
         return resultSet;
     }
 
-    public boolean executeUpdate(String sql) throws SQLException {
+    public boolean executeUpdate(String sql) {
         getConnection();
         boolean result = false;
         try {
@@ -68,7 +69,7 @@ public class DB {
         return result;
     }
 
-    public void close() throws SQLException {
+    public void close() {
         try {
 
             if (resultSet != null) {

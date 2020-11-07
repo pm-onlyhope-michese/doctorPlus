@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public abstract class Controller {
     protected App app;
+
     public Controller() {
         app = App.getInstance();
     }

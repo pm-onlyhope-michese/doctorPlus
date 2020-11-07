@@ -11,11 +11,6 @@ import sample.classes.Patient;
 import sample.config.Config;
 import sample.controller.baseController.Controller;
 import sample.model.ModelPatientProfile;
-import sample.model.baseModel.Model;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Optional;
 
 import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 
@@ -43,15 +38,17 @@ public class ControllerPatientProfile extends Controller {
     private ChoiceBox<String> choiceBoxAnalysisResult;
 
     @FXML
-    private void initialize() throws IOException, SQLException {
+    private void initialize() {
         System.out.println("initialize ControllerPatientProfile");
 
         if (app.getCurrentDoctor() == null) {
-            app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+            Config config = new Config();
+            app.setScene(config.pathDoctorAuthorization, config.getPath(config.pathDoctorAuthorization));
         }
 
         if (app.getCurrentPatient() == null) {
-            app.setScene(Config.pathPatientsTable, Config.paths.get(Config.pathPatientsTable));
+            Config config = new Config();
+            app.setScene(config.pathPatientsTable, config.getPath(config.pathPatientsTable));
         }
 
         model = new ModelPatientProfile();
@@ -68,13 +65,13 @@ public class ControllerPatientProfile extends Controller {
     }
 
     @FXML
-    private void clickButtonDeleteAnalysisFromPatient(ActionEvent event) throws IOException {
+    private void clickButtonDeleteAnalysisFromPatient() {
         if (tableViewAnalyzes.getSelectionModel().getSelectedItem() == null) {
             showMessageError("Ошибка!", "Выберите анализ!");
             return;
         }
 
-        if(!showMessageConfirmation("Предупреждение", "Вы уверены, что хотите удалить анализ пациента?")) {
+        if (!showMessageConfirmation("Предупреждение", "Вы уверены, что хотите удалить анализ пациента?")) {
             return;
         }
 
@@ -83,17 +80,19 @@ public class ControllerPatientProfile extends Controller {
             return;
         }
 
-        app.setScene(Config.pathPatientProfile, Config.paths.get(Config.pathPatientProfile));
+        Config config = new Config();
+        app.setScene(config.pathPatientProfile, config.getPath(config.pathPatientProfile));
     }
 
     @FXML
-    private void clickButtonBack(ActionEvent event) throws IOException {
+    private void clickButtonBack() {
         app.setCurrentPatient();
-        app.setScene(Config.pathPatientsTable, Config.paths.get(Config.pathPatientsTable));
+        Config config = new Config();
+        app.setScene(config.pathPatientsTable, config.getPath(config.pathPatientsTable));
     }
 
     @FXML
-    private void clickButtonAddAnalysis(ActionEvent event) throws IOException {
+    private void clickButtonAddAnalysis() {
         String result = null;
 
         if (choiceBoxAnalysisNames.getValue() == null) {
@@ -120,11 +119,12 @@ public class ControllerPatientProfile extends Controller {
             return;
         }
 
-        app.setScene(Config.pathPatientProfile, Config.paths.get(Config.pathPatientProfile));
+        Config config = new Config();
+        app.setScene(config.pathPatientProfile, config.getPath(config.pathPatientProfile));
     }
 
     @FXML
-    private void clickButtonChangeNamePatient(ActionEvent event) throws IOException {
+    private void clickButtonChangeNamePatient() {
         String firstName = trim(textFieldFirstName.getText());
         String lastName = trim(textFieldLastName.getText());
 
@@ -149,7 +149,8 @@ public class ControllerPatientProfile extends Controller {
         }
 
         app.setCurrentPatient(new Patient(app.getCurrentPatient().getId(), firstName, lastName));
-        app.setScene(Config.pathPatientProfile, Config.paths.get(Config.pathPatientProfile));
+        Config config = new Config();
+        app.setScene(config.pathPatientProfile, config.getPath(config.pathPatientProfile));
     }
 
     @FXML
@@ -168,11 +169,8 @@ public class ControllerPatientProfile extends Controller {
     }
 
     @FXML
-    private void clickButtonPrintAnalyzes(ActionEvent event) {
-        if(model.printAnalyzes(app.getCurrentPatient())) {
-            showMessageConfirmation("Успех", "Документ успешно создан");
-        } else {
-            showMessageError("Ошибка!", "Что-то пошло не так");
-        }
+    private void clickButtonPrintAnalyzes() {
+        model.printAnalyzes(app.getCurrentPatient());
+        showMessageConfirmation("Успех", "Документ успешно создан");
     }
 }

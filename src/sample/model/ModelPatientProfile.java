@@ -5,31 +5,20 @@ import javafx.collections.ObservableList;
 import sample.classes.Analysis;
 import sample.classes.AnalysisNameList;
 import sample.classes.Patient;
-import sample.model.baseModel.Documentation;
 import sample.model.baseModel.Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ModelPatientProfile extends Model {
     public boolean changeNamePatient(int patient_id, String firstName, String lastName) {
-        boolean result = false;
         String sql = "update patients set first_name = '" + firstName + "', " +
                 "last_name = '" + lastName + "' " +
                 "where patient_id = " + patient_id;
-
-        try {
-            result = db.executeUpdate(sql);
-        } catch (SQLException exp) {
-            System.err.println(exp.getMessage());
-        }
-
-        return result;
+        return db.executeUpdate(sql);
     }
 
-    public ObservableList<Analysis> getAllAnalyzesByPatientId(int patient_id) throws SQLException {
+    public ObservableList<Analysis> getAllAnalyzesByPatientId(int patient_id) {
         ObservableList<Analysis> analyses = FXCollections.observableArrayList();
         String sql = "select analysis_id, updatedate_at, `result`, title, description, `type` from analysis\n" +
                 "inner join analysis_namelist using(analysis_namelist_id)\n" +
@@ -52,7 +41,7 @@ public class ModelPatientProfile extends Model {
         return analyses;
     }
 
-    public ObservableList<AnalysisNameList> getAllAnalysisNames() throws SQLException {
+    public ObservableList<AnalysisNameList> getAllAnalysisNames() {
         ObservableList<AnalysisNameList> analysisNames = FXCollections.observableArrayList();
         String sql = "select `analysis_namelist_id`, `title`, `type` from analysis_namelist";
 
@@ -72,34 +61,18 @@ public class ModelPatientProfile extends Model {
     }
 
     public boolean addAnalysisToPatient(int patient_id, int analysisNameListId, String analysisResult) {
-        boolean result = false;
         String sql = "insert into analysis (patient_id, analysis_namelist_id, result) values " +
                 "(" + patient_id + ", " + analysisNameListId + ", '" + analysisResult + "')";
-
-        try {
-            result = db.executeUpdate(sql);
-        } catch (SQLException exp) {
-            System.err.println(exp.getMessage());
-        }
-
-        return result;
+        return db.executeUpdate(sql);
     }
 
     public boolean deleteAnalysisByAnalysisId(int analysis_id) {
-        boolean result = false;
         String sql = "delete from analysis where analysis_id = " + analysis_id;
-
-        try {
-            result = db.executeUpdate(sql);
-        } catch (SQLException exp) {
-            System.err.println(exp);
-        }
-
-        return result;
+        return db.executeUpdate(sql);
     }
 
-    public boolean printAnalyzes(Patient patient) {
+    public void printAnalyzes(Patient patient) {
         ModelPrintDocumentation model = new ModelPrintDocumentation();
-        return model.printAnalyzes(patient);
+        model.printAnalyzes(patient);
     }
 }

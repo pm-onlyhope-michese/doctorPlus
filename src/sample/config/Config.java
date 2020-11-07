@@ -3,25 +3,43 @@ package sample.config;
 import java.util.HashMap;
 
 public class Config {
-    public static final String urlDB = "jdbc:mysql://localhost:3306/hospital?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    public static final String userNameDB = "root";
-    public static final String passwordDB = "1234";
-    public static final String pathDoctorAuthorization = "view/doctorAuthorization.fxml";
-    public static final String pathDoctorRegistration = "view/doctorRegistration.fxml";
-    public static final String pathPatientProfile = "view/patientProfile.fxml";
-    public static final String pathPatientRegistration = "view/patientRegistration.fxml";
-    public static final String pathPatientsTable = "view/patientsTable.fxml";
-    public static final String pathPrintDocumentation = "view/printDocumentation.fxml";
-    public static final Integer widthApp = 731;
-    public static final Integer heightApp = 456;
+    public final String urlDB;
+    public final String userNameDB;
+    public final String passwordDB;
+    public final String pathDoctorAuthorization;
+    public final String pathDoctorRegistration;
+    public final String pathPatientProfile;
+    public final String pathPatientRegistration;
+    public final String pathPatientsTable;
+    public final String pathPrintDocumentation;
+    public final Integer widthApp;
+    public final Integer heightApp;
 
-    public static HashMap<String, String> paths = new HashMap();
-    public static void initialize() {
+    private final HashMap<String, String> paths;
+
+    public Config() {
+        urlDB = "jdbc:mysql://localhost:3306/hospital?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        userNameDB = "root";
+        passwordDB = "1234";
+        pathDoctorAuthorization = "view/doctorAuthorization.fxml";
+        pathDoctorRegistration = "view/doctorRegistration.fxml";
+        pathPatientProfile = "view/patientProfile.fxml";
+        pathPatientRegistration = "view/patientRegistration.fxml";
+        pathPatientsTable = "view/patientsTable.fxml";
+        pathPrintDocumentation = "view/printDocumentation.fxml";
+        widthApp = 731;
+        heightApp = 456;
+
+        paths = new HashMap<>();
         paths.put(pathDoctorAuthorization, "Авторизация");
         paths.put(pathDoctorRegistration, "Регистрация");
         paths.put(pathPatientProfile, "Профиль пациента");
         paths.put(pathPatientRegistration, "Добавление нового пациента");
         paths.put(pathPatientsTable, "Пациенты");
         paths.put(pathPrintDocumentation, "Печать");
+    }
+
+    public String getPath(String key) {
+        return paths.get(key);
     }
 }

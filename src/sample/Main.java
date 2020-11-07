@@ -7,10 +7,9 @@ import sample.controller.App;
 
 public class Main extends Application {
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Config.initialize();
-
-        App.getInstance().setScene(primaryStage, Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+    public void start(Stage primaryStage){
+        Config config = new Config();
+        App.getInstance().setScene(primaryStage, config.pathDoctorAuthorization, config.getPath(config.pathDoctorAuthorization));
     }
 
     public static void main(String[] args) {

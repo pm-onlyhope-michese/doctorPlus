@@ -8,18 +8,13 @@ import sample.model.baseModel.Model;
 import java.sql.*;
 
 public class ModelPatientRegistration extends Model {
-    public int patientRegistration(int doctor_id, String firstName, String lastName) throws SQLException {
+    public int patientRegistration(int doctor_id, String firstName, String lastName) {
         boolean result = false;
         int patient_id = 0;
         String sql = "insert into patients (first_name, last_name) values " +
                 "('" + firstName + "', '" + lastName + "')";
-
-        try {
-            if (db.executeUpdate(sql)) {
-                result = true;
-            }
-        } catch (SQLException exp) {
-            System.err.println(exp.getMessage());
+        if (db.executeUpdate(sql)) {
+            result = true;
         }
 
         sql = "select max(patient_id) as max from patients";
@@ -44,22 +39,12 @@ public class ModelPatientRegistration extends Model {
     }
 
     public boolean addPatientToDoctor(int doctor_id, int patient_id) {
-        boolean result = false;
         String sql = "insert into doctors_patients (doctor_id, patient_id) values " +
                 "('" + doctor_id + "', '" + patient_id + "')";
-
-        try {
-            if (db.executeUpdate(sql)) {
-                result = true;
-            }
-        } catch (SQLException exp) {
-            System.err.println(exp.getMessage());
-        }
-
-        return result;
+        return db.executeUpdate(sql);
     }
 
-    public ObservableList<Patient> getAllPatientsExceptDoctorPatients(int doctor_id) throws SQLException {
+    public ObservableList<Patient> getAllPatientsExceptDoctorPatients(int doctor_id) {
         ObservableList<Patient> patients = FXCollections.observableArrayList();
         String sql = "select distinct patients.patient_id, first_name, last_name from patients \n" +
                 "left join doctors_patients on doctors_patients.patient_id = patients.patient_id\n" +

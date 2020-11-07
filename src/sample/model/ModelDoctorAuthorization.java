@@ -7,10 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ModelDoctorAuthorization extends Model {
-    public Doctor doctorAuthorization(String login, String password) throws SQLException {
+    public Doctor doctorAuthorization(String login, String password) {
         Doctor doctor = null;
         String hashPassword = get_SHA_512_SecurePassword(password, login);
-        String sql = "select * from doctors where login = '" + login + "' and password = '" + hashPassword + "'";
+        String sql = "select doctor_id, first_name, last_name from doctors where login = '" + login + "'\n" +
+                "and password = '" + hashPassword + "'";
 
         try {
             ResultSet resultSet = db.executeQuery(sql);

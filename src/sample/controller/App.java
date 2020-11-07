@@ -14,29 +14,7 @@ public class App {
     private static volatile App instance;
     private Patient currentPatient;
     private Doctor currentDoctor;
-    public Stage stage;
-
-    public void setCurrentDoctor(Doctor currentDoctor) {
-        this.currentDoctor = currentDoctor;
-    }
-    public void setCurrentDoctor() {
-        this.currentDoctor = null;
-    }
-
-    public void setCurrentPatient(Patient currentPatient) {
-        this.currentPatient = currentPatient;
-    }
-    public void setCurrentPatient() {
-        this.currentPatient = null;
-    }
-
-
-    public Patient getCurrentPatient() {
-        return currentPatient;
-    }
-    public Doctor getCurrentDoctor() {
-        return currentDoctor;
-    }
+    private Stage stage;
 
     private App() {
         stage = null;
@@ -56,21 +34,59 @@ public class App {
         return instance;
     }
 
-    public void setScene(Stage newScene, String pathResource, String newTitle) throws IOException {
+    public void setCurrentDoctor(Doctor currentDoctor) {
+        this.currentDoctor = currentDoctor;
+    }
+
+    public void setCurrentDoctor() {
+        this.currentDoctor = null;
+    }
+
+    public void setCurrentPatient(Patient currentPatient) {
+        this.currentPatient = currentPatient;
+    }
+
+    public void setCurrentPatient() {
+        this.currentPatient = null;
+    }
+
+    public Patient getCurrentPatient() {
+        return currentPatient;
+    }
+
+    public Doctor getCurrentDoctor() {
+        return currentDoctor;
+    }
+
+    public void setScene(Stage newScene, String pathResource, String newTitle) {
         stage = newScene;
-        Parent root = FXMLLoader.load(getClass().getResource(pathResource));
+        Parent root = null;
+
+        try {
+            root = FXMLLoader.load(getClass().getResource(pathResource));
+        } catch (IOException exp) {
+            System.err.println(exp.getMessage());
+        }
+
         stage.setTitle(newTitle);
-        stage.setScene(new Scene(root, Config.widthApp, Config.heightApp));
+        Config config = new Config();
+        stage.setScene(new Scene(root, config.widthApp, config.heightApp));
         stage.show();
     }
 
-    public void setScene(String pathResource, String newTitle) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(pathResource));
+    public void setScene(String pathResource, String newTitle) {
+        Parent root = null;
+
+        try {
+            root = FXMLLoader.load(getClass().getResource(pathResource));
+        } catch (IOException exp) {
+            System.err.println(exp.getMessage());
+        }
+
         double height = stage.getScene().getHeight();
         double width = stage.getScene().getWidth();
         stage.setTitle(newTitle);
         stage.setScene(new Scene(root, width, height));
         stage.show();
     }
-
 }

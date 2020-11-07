@@ -1,6 +1,5 @@
 package sample.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -9,9 +8,6 @@ import sample.config.Config;
 import sample.controller.baseController.Controller;
 import sample.model.ModelDoctorRegistration;
 
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,7 +35,7 @@ public class ControllerDoctorRegistration extends Controller {
     }
 
     @FXML
-    private void clickButtonApply(ActionEvent event) throws IOException, SQLException {
+    private void clickButtonApply() {
         String firstName = trim(textFieldFirstName.getText()).toLowerCase();
         String lastName = trim(textFieldLastName.getText()).toLowerCase();
 
@@ -80,11 +76,14 @@ public class ControllerDoctorRegistration extends Controller {
             labelError.setText("Что-то пошло не так");
             return;
         }
-        app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+
+        Config config = new Config();
+        app.setScene(config.pathDoctorAuthorization, config.getPath(config.pathDoctorAuthorization));
     }
 
     @FXML
-    private void clickButtonBack(ActionEvent event) throws IOException, SQLException {
-        app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+    private void clickButtonBack() {
+        Config config = new Config();
+        app.setScene(config.pathDoctorAuthorization, config.getPath(config.pathDoctorAuthorization));
     }
 }

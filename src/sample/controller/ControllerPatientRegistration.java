@@ -1,8 +1,6 @@
 package sample.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,8 +9,6 @@ import sample.config.Config;
 import sample.controller.baseController.Controller;
 import sample.model.ModelPatientRegistration;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,10 +26,11 @@ public class ControllerPatientRegistration extends Controller {
     private Label labelError;
 
     @FXML
-    private void initialize() throws IOException, SQLException {
+    private void initialize() {
         System.out.println("initialize ControllerPatientRegistration");
         if (app.getCurrentDoctor() == null) {
-            app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+            Config config = new Config();
+            app.setScene(config.pathDoctorAuthorization, config.getPath(config.pathDoctorAuthorization));
         }
         model = new ModelPatientRegistration();
         comboBoxPatientsList.setVisibleRowCount(20);
@@ -41,12 +38,13 @@ public class ControllerPatientRegistration extends Controller {
     }
 
     @FXML
-    private void clickButtonBack(ActionEvent event) throws IOException {
-        app.setScene(Config.pathPatientsTable, Config.paths.get(Config.pathPatientsTable));
+    private void clickButtonBack() {
+        Config config = new Config();
+        app.setScene(config.pathPatientsTable, config.getPath(config.pathPatientsTable));
     }
 
     @FXML
-    private void clickButtonApply(ActionEvent event) throws IOException, SQLException {
+    private void clickButtonApply() {
         boolean result = false;
         int patient_id = 0;
 
@@ -80,7 +78,8 @@ public class ControllerPatientRegistration extends Controller {
 
         if (result && patient_id != 0) {
             app.setCurrentPatient(model.getPatientById(patient_id));
-            app.setScene(Config.pathPatientProfile, Config.paths.get(Config.pathPatientProfile));
+            Config config = new Config();
+            app.setScene(config.pathPatientProfile, config.getPath(config.pathPatientProfile));
         } else {
             labelError.setText("Что-то пошло не так");
         }

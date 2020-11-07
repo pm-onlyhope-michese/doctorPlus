@@ -5,17 +5,25 @@ public class Analysis {
     private String title;
     private String description;
     private String date;
-    private String typeA;
+    private String type;
+    private String result;
+
+    public Analysis(int id, String title, String description, String date, String type, String result) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.result = result;
+        this.type = type;
+        this.date = date;
+    }
 
     public String getDate() {
         return date;
     }
 
-    public String getTypeA() {
-        return this.typeA;
+    public String getType() {
+        return this.type;
     }
-
-    private String result;
 
     public String getDescription() {
         return description;
@@ -35,14 +43,5 @@ public class Analysis {
 
     public int getId() {
         return id;
-    }
-
-    public Analysis(int id, String title, String description, String date, String typeA, String result) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.result = result;
-        this.typeA = typeA;
-        this.date = date;
     }
 }

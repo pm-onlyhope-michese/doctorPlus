@@ -1,8 +1,6 @@
 package sample.controller;
 
-import javafx.animation.PauseTransition;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,14 +11,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import sample.classes.Patient;
 import sample.config.Config;
 import sample.controller.baseController.Controller;
 import sample.model.ModelPatientsTable;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class ControllerPatientsTable extends Controller {
     private ModelPatientsTable model;
@@ -36,10 +32,11 @@ public class ControllerPatientsTable extends Controller {
     private TextField textFieldSearch;
 
     @FXML
-    private void initialize() throws IOException, SQLException {
+    private void initialize() {
         System.out.println("initialize ControllerPatientsTable");
         if (app.getCurrentDoctor() == null) {
-            app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+            Config config = new Config();
+                app.setScene(config.pathDoctorAuthorization, config.getPath(config.pathDoctorAuthorization));
         }
         model = new ModelPatientsTable();
         doctorName.setText(app.getCurrentDoctor().getFull_name());
@@ -48,63 +45,66 @@ public class ControllerPatientsTable extends Controller {
         tableViewPatients.setItems(model.getAllPatientsByDoctorId(app.getCurrentDoctor().getId()));
 
         textFieldSearch.textProperty().addListener((obs, oldText, textSearch) -> {
-            try {
                 inputTextFieldSearch(obs, oldText, textSearch);
-            } catch (SQLException exp) {
-                System.out.println(exp.getMessage());
-            }
         });
     }
 
     @FXML
-    private void clickButtonLogout(ActionEvent event) throws IOException {
+    private void clickButtonLogout() {
         if(!showMessageConfirmation("Выход", "Вы уверены, что хотите выйти?")) {
             return;
         }
 
         app.setCurrentDoctor();
-        app.setScene(Config.pathDoctorAuthorization, Config.paths.get(Config.pathDoctorAuthorization));
+        Config config = new Config();
+            app.setScene(config.pathDoctorAuthorization, config.getPath(config.pathDoctorAuthorization));
     }
 
     @FXML
-    private void clickButtonAddPatient(ActionEvent event) throws IOException {
-        app.setScene(Config.pathPatientRegistration, Config.paths.get(Config.pathPatientRegistration));
+    private void clickButtonAddPatient() {
+        Config config = new Config();
+            app.setScene(config.pathPatientRegistration, config.getPath(config.pathPatientRegistration));
     }
 
     @FXML
-    private void clickButtonOpenPatientProfile(ActionEvent event) throws IOException {
+    private void clickButtonOpenPatientProfile() {
         if (tableViewPatients.getSelectionModel().getSelectedItem() != null) {
             app.setCurrentPatient(tableViewPatients.getSelectionModel().getSelectedItem());
-            app.setScene(Config.pathPatientProfile, Config.paths.get(Config.pathPatientProfile));
+            Config config = new Config();
+            app.setScene(config.pathPatientProfile, config.getPath(config.pathPatientProfile));
         }
     }
 
     @FXML
-    private void clickButtonDeletePatient(ActionEvent event) throws IOException {
+    private void clickButtonDeletePatient() {
         if(!showMessageConfirmation("Предупреждение", "Вы уверены, что хотите удалить пациента?")) {
             return;
         }
 
         int patient_id = tableViewPatients.getSelectionModel().getSelectedItem().getId();
         model.deletePatientByPatientIdAndDoctorId(app.getCurrentDoctor().getId(), patient_id);
-        app.setScene(Config.pathPatientsTable, Config.paths.get(Config.pathPatientsTable));
-    }
-
-    private void inputTextFieldSearch(ObservableValue<? extends String> obs, String oldText, String textSearch) throws SQLException {
-        tableViewPatients.setItems(model.getAllPatientsByDoctorId(app.getCurrentDoctor().getId(), textSearch));
+        Config config = new Config();
+        app.setScene(config.pathPatientsTable, config.getPath(config.pathPatientsTable));
     }
 
     @FXML
     private void clickButtonPrint() {
         Stage stage = new Stage();
+        Config config = new Config();
         Parent root = null;
+
         try {
-            root = FXMLLoader.load(getClass().getResource(Config.pathPrintDocumentation));
+            root = FXMLLoader.load(getClass().getResource(config.pathPrintDocumentation));
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        stage.setTitle(Config.paths.get(Config.pathPrintDocumentation));
+
+        stage.setTitle(config.getPath(config.pathPrintDocumentation));
         stage.setScene(new Scene(root, 259, 254));
         stage.show();
+    }
+
+    private void inputTextFieldSearch(ObservableValue<? extends String> obs, String oldText, String textSearch) {
+        tableViewPatients.setItems(model.getAllPatientsByDoctorId(app.getCurrentDoctor().getId(), textSearch));
     }
 }

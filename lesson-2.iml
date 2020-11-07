@@ -10,5 +10,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.20" level="project" />
     <orderEntry type="library" name="maven" level="project" />
+    <orderEntry type="library" name="fr.opensagres.xdocreport:org.apache.poi.xwpf.converter.pdf:1.0.6" level="project" />
   </component>
 </module>

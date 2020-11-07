@@ -6,25 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ModelDoctorRegistration extends Model {
-    public boolean doctorRegistration(String firstName, String lastName, String login, String password) throws SQLException {
-        boolean result = false;
+    public boolean doctorRegistration(String firstName, String lastName, String login, String password) {
         String hashPassword = get_SHA_512_SecurePassword(password, login);
         String sql = "insert into doctors (first_name, last_name, login, password) " +
                 "values " +
                 "('"+ firstName+"', '"+lastName+"', '"+login+"', '"+hashPassword+"')";
-
-        try {
-            if (db.executeUpdate(sql)) {
-                result = true;
-            }
-        } catch (SQLException exp) {
-            System.err.println(exp.getMessage());
-        }
-
-        return result;
+        return db.executeUpdate(sql);
     }
 
-    public boolean findLogin(String login) throws SQLException {
+    public boolean findLogin(String login) {
         boolean result = false;
         try {
             ResultSet resultSet = db.executeQuery("select doctor_id from doctors where login = '" + login + "'");
@@ -32,7 +22,6 @@ public class ModelDoctorRegistration extends Model {
                 result = true;
             }
         } catch (SQLException exp) {
-            result = true;
             System.err.println(exp.getMessage());
         } finally {
             db.close();

@@ -1,12 +1,8 @@
 package sample.model.baseModel;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
 
 public abstract class Model {
     protected DB db;
