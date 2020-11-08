@@ -11,8 +11,6 @@ import sample.model.ModelDoctorRegistration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
-
 public class ControllerDoctorRegistration extends Controller {
     private ModelDoctorRegistration model;
     @FXML
