@@ -19,6 +19,7 @@ public class DB {
             try {
                 Config config = new Config();
                 Class.forName("com.mysql.jdbc.Driver");
+                System.out.println("чего-нибудь напиши");
                 this.connection = DriverManager.getConnection(config.urlDB, config.userNameDB, config.passwordDB);
                 System.out.println("connection successful");
             } catch (SQLException | ClassNotFoundException exp) {

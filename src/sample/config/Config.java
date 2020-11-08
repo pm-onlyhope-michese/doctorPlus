@@ -19,7 +19,7 @@ public class Config {
 
     public Config() {
         urlDB = "jdbc:mysql://localhost:3306/hospital?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        userNameDB = "root";
+        userNameDB = "pm-onlyhope-michese";
         passwordDB = "1234";
         pathDoctorAuthorization = "view/doctorAuthorization.fxml";
         pathDoctorRegistration = "view/doctorRegistration.fxml";

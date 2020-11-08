@@ -11,7 +11,7 @@ import sample.model.ModelDoctorRegistration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
+//import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 
 public class ControllerDoctorRegistration extends Controller {
     private ModelDoctorRegistration model;
@@ -36,12 +36,12 @@ public class ControllerDoctorRegistration extends Controller {
 
     @FXML
     private void clickButtonApply() {
-        String firstName = trim(textFieldFirstName.getText()).toLowerCase();
-        String lastName = trim(textFieldLastName.getText()).toLowerCase();
+        String firstName = (textFieldFirstName.getText()).trim().toLowerCase();
+        String lastName = (textFieldLastName.getText()).trim().toLowerCase();
 
-        String login = trim(textFieldLogin.getText());
-        String firstPassword = trim(textFieldFirstPassword.getText());
-        String secondPassword = trim(textFieldSecondPassword.getText());
+        String login = (textFieldLogin.getText().trim());
+        String firstPassword = (textFieldFirstPassword.getText().trim());
+        String secondPassword = (textFieldSecondPassword.getText()).trim();
 
         if (firstName.isEmpty() || lastName.isEmpty() || login.isEmpty()
                 || firstPassword.isEmpty() || secondPassword.isEmpty()
